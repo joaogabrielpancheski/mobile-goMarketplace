@@ -30,11 +30,17 @@ const CartProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      // TODO LOAD ITEMS FROM ASYNC STORAGE
+      const prod = await AsyncStorage.getItem('@GoMarketplace:products');
+
+      if (prod) setProducts(JSON.parse(prod));
     }
 
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem('@GoMarketplace:products', JSON.stringify(products));
+  }, [products]);
 
   const increment = useCallback(
     async id => {
