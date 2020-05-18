@@ -31,11 +31,11 @@ interface Product {
 const Dashboard: React.FC = () => {
   const { addToCart } = useCart();
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([] as Product[]);
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      const { data } = await api.get<Product[]>('products');
+      const { data } = await api.get('products');
 
       setProducts(data);
     }
