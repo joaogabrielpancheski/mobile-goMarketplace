@@ -39,17 +39,18 @@ const Cart: React.FC = () => {
   const { increment, decrement, products } = useCart();
 
   function handleIncrement(id: string): void {
-    // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
-    // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
     return formatValue(
       products.reduce(
-        (accumulator, currentProduct) => accumulator + currentProduct.price,
+        (accumulator, currentProduct) =>
+          accumulator + currentProduct.quantity * currentProduct.price,
         0,
       ),
     );
