@@ -26,7 +26,8 @@ const FloatingCart: React.FC = () => {
   const cartTotal = useMemo(() => {
     return formatValue(
       products.reduce(
-        (accumulator, currentProduct) => accumulator + currentProduct.price,
+        (accumulator, currentProduct) =>
+          accumulator + currentProduct.quantity * currentProduct.price,
         0,
       ),
     );
