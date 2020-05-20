@@ -18,7 +18,7 @@ interface Product {
 
 interface CartContext {
   products: Product[];
-  addToCart(item: Product): void;
+  addToCart(item: Omit<Product, 'quantity'>): void;
   increment(id: string): void;
   decrement(id: string): void;
 }
@@ -76,7 +76,7 @@ const CartProvider: React.FC = ({ children }) => {
         increment(product.id);
       } else {
         const newProd =
-          product.quantity < 1 ? { ...product, quantity: 1 } : product;
+          product.quantity !== 1 ? { ...product, quantity: 1 } : product;
 
         setProducts([...products, newProd]);
       }
